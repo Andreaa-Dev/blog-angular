@@ -17,7 +17,7 @@ In this project, you'll create a blog platform using Angular, focusing on core t
   - Main app just display a list of all blogs.
   - Clicking on each row/card (single blog) would show/hide details of that blog.
   - In each row/card, there should be edit/delete button as well.
-  - Clicking on edit/delete button should enable the coresponding feature.
+  - Clicking on edit/delete button should enable the corresponding feature.
   - There should be button to create new blog in the main app.
 
 ## Prerequisites
