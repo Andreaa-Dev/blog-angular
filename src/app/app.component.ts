@@ -39,15 +39,15 @@ export class AppComponent implements OnInit {
       // Add other properties as needed
     };
 
-    this.blogService.addBlog(newBlog).subscribe(
-      (addedBlog: BlogRaw) => {
+    this.blogService.addBlog(newBlog).subscribe({
+      next: (addedBlog: BlogRaw) => {
         console.log('Blog created successfully:', addedBlog);
         this.showCreate = false;
         this.fetchBlogs();
       },
-      (error) => {
+      error: (error) => {
         console.error('Error creating blog:', error);
-      }
-    );
+      },
+    });
   }
 }
