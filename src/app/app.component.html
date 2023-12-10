@@ -5,9 +5,10 @@
   <button (click)="showCreateForm()">Create New Blog</button>
 
   <!-- Create Blog Form -->
-  <!-- (blogCreated)="handleBlogCreated($event)" -->
-
-  <app-blog-create *ngIf="showCreate"></app-blog-create>
+  <app-blog-create
+    *ngIf="showCreate"
+    (blogCreated)="handleBlogCreated($event)"
+  ></app-blog-create>
 
   <!-- Displaying a List of Blogs -->
   <!-- <div *ngFor="let blog of blogs">

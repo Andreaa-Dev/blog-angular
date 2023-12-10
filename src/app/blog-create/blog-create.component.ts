@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BlogRaw } from '../model/blog.model';
+import { Observable } from 'rxjs';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-blog-create',
@@ -7,9 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./blog-create.component.css'],
 })
 export class BlogCreateComponent {
+  @Output() blogCreated = new EventEmitter<BlogRaw>();
   createNewBlog: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private blogService: BlogService) {
     this.createNewBlog = this.fb.group({
       title: ['', [Validators.required]],
       author: ['', [Validators.required]],
@@ -17,13 +21,15 @@ export class BlogCreateComponent {
       date: [
         '',
         Validators.required,
-        // date follows the pattern 'YYYY-MM-DD'
-        Validators.pattern(/^\d{4}-\d{2}-\d{2}$/),
+        // // date follows the pattern 'YYYY-MM-DD'
+        // Validators.pattern(/^\d{4}-\d{2}-\d{2}$/),
       ],
     });
   }
 
   handleBlogCreated() {
-    console.log(this.createNewBlog.value);
+    const newBlog: BlogRaw = this.createNewBlog.value;
+    // Emit the blog data
+    this.blogCreated.emit(newBlog);
   }
 }
