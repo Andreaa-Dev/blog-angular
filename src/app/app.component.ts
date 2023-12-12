@@ -10,7 +10,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   blogs!: BlogRaw[];
-
+  blog!: BlogRaw;
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
@@ -54,6 +54,18 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error creating blog:', error);
+      },
+    });
+  }
+
+  // show blog detail
+  toggleBlogDetail(blog: BlogRaw) {
+    this.blogService.getBlog(blog.id).subscribe({
+      next: (v) => {
+        this.blog = v;
+      },
+      error: (e) => {
+        console.log(e);
       },
     });
   }

@@ -12,22 +12,24 @@
   ></app-blog-create>
 
   <!-- Displaying a List of Blogs -->
-  <!-- <div *ngFor="let blog of blogs">
+  <div *ngFor="let blog of blogs">
     <h3 (click)="toggleBlogDetail(blog)">
       {{ blog.title }} - {{ blog.date | date }}
-    </h3> -->
-  <!-- Show/Hide Blog Detail -->
-  <!-- <div *ngIf="blog.showDetail"> -->
-  <!-- <app-blog-detail [blog]="blog"></app-blog-detail>
-      <button (click)="showEditForm(blog)">Edit</button>
-      <button (click)="deleteBlog(blog)">Delete</button> -->
+    </h3>
+    <!-- Show/Hide Blog Detail -->
+    <!-- <div *ngIf="blog.showDetail"> -->
 
-  <!-- Edit Blog Form -->
-  <!-- <app-blog-edit
+    <app-blog-detail [blog]="blog"></app-blog-detail>
+    <!-- <button (click)="showEditForm(blog)">Edit</button> -->
+    <!-- <button (click)="deleteBlog(blog)">Delete</button> -->
+
+    <!-- Edit Blog Form -->
+    <!-- <app-blog-edit
         *ngIf="blog.showEdit"
         [blog]="blog"
         (blogUpdated)="handleBlogUpdated($event)"
       ></app-blog-edit> -->
-  <!-- </div>
+    <!-- </div>
   </div> -->
+  </div>
 </div>

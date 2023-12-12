@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { BlogRaw } from '../model/blog.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-blog-list',
