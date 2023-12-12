@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Welcome to the Blog App</h1>
-  <app-blog-list></app-blog-list>
+  <!-- pass blogs to blog-list -->
+  <app-blog-list [allBlogs]="blogs"></app-blog-list>
   <!-- Create New Blog Button -->
   <button (click)="showCreateForm()">Create New Blog</button>
 

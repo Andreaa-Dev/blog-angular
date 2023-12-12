@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from './blog.service';
 import { Blog, BlogRaw } from './model/blog.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  blogs!: Observable<BlogRaw[]>;
+  blogs!: BlogRaw[];
 
   constructor(private blogService: BlogService) {}
 
@@ -18,7 +18,14 @@ export class AppComponent implements OnInit {
   }
 
   fetchBlogs() {
-    this.blogs = this.blogService.getBlogs();
+    this.blogService.getBlogs().subscribe({
+      next: (v) => {
+        this.blogs = v;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
   }
 
   showCreate = false;

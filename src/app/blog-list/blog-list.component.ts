@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BlogRaw } from '../model/blog.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-blog-list',
@@ -6,20 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent {
-  blogs = [
-    {
-      id: 1,
-      title: 'First Blog Title',
-      date: '2023-04-22',
-      author: 'John Doe',
-      content: 'This is the content of the first blog.',
-    },
-    {
-      id: 2,
-      title: 'Second Blog Title',
-      date: '2023-04-23',
-      author: 'Jane Smith',
-      content: 'This is the content of the second blog.',
-    },
-  ];
+  @Input() allBlogs!: BlogRaw[];
 }
