@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BlogRaw } from '../model/blog.model';
+import { Blog } from '../model/blog.model';
 
 @Component({
   selector: 'app-blog-list',
@@ -7,5 +7,5 @@ import { BlogRaw } from '../model/blog.model';
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent {
-  @Input() allBlogs!: BlogRaw[];
+  @Input() allBlogs!: Blog[];
 }

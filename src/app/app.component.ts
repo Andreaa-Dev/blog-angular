@@ -9,8 +9,10 @@ import { Observable, tap } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  blogs!: BlogRaw[];
+  blogs!: Blog[];
   blog!: BlogRaw;
+  showCreate = false;
+
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
@@ -20,7 +22,8 @@ export class AppComponent implements OnInit {
   fetchBlogs() {
     this.blogService.getBlogs().subscribe({
       next: (v) => {
-        this.blogs = v;
+        const result = v.map((item) => ({ ...item, showDetail: false }));
+        this.blogs = result;
       },
       error: (e) => {
         console.log(e);
@@ -28,7 +31,17 @@ export class AppComponent implements OnInit {
     });
   }
 
-  showCreate = false;
+  fetchBlog(blog: BlogRaw) {
+    this.blogService.getBlog(blog.id).subscribe({
+      next: (v) => {
+        this.blog = v;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
+  }
+
   // logic to create new form
   showCreateForm() {
     this.showCreate = true;
@@ -37,18 +50,16 @@ export class AppComponent implements OnInit {
   // handleBlogCreated(event: any) {}
   handleBlogCreated(newBlogRaw: BlogRaw) {
     const newBlog: Blog = {
-      showDetail: true,
+      showDetail: false,
       id: newBlogRaw.id,
       title: newBlogRaw.title,
       author: newBlogRaw.author,
       content: newBlogRaw.content,
       date: newBlogRaw.date,
-      // Add other properties as needed
     };
 
     this.blogService.addBlog(newBlog).subscribe({
-      next: (addedBlog: BlogRaw) => {
-        console.log('Blog created successfully:', addedBlog);
+      next: () => {
         this.showCreate = false;
         this.fetchBlogs();
       },
@@ -60,12 +71,38 @@ export class AppComponent implements OnInit {
 
   // show blog detail
   toggleBlogDetail(blog: BlogRaw) {
-    this.blogService.getBlog(blog.id).subscribe({
-      next: (v) => {
-        this.blog = v;
+    const foundBlog = this.blogs.find((item) => item.id === blog.id);
+    if (foundBlog) {
+      foundBlog.showDetail = !foundBlog.showDetail;
+      this.fetchBlog(foundBlog);
+    }
+  }
+  // show edit form
+  showEditForm(blog: BlogRaw) {
+    // this.blogService.updateBlog(blog)
+  }
+  // delete blog
+  deleteBlog(blogId: number) {
+    this.blogService.deleteBlog(blogId);
+  }
+  // edit
+  handleBlogUpdated(blog: BlogRaw) {
+    const newBlog: Blog = {
+      showDetail: false,
+      id: blog.id,
+      title: blog.title,
+      author: blog.author,
+      content: blog.content,
+      date: blog.date,
+    };
+
+    this.blogService.updateBlog(newBlog).subscribe({
+      next: () => {
+        this.showCreate = false;
+        this.fetchBlogs();
       },
-      error: (e) => {
-        console.log(e);
+      error: (error) => {
+        console.error('Error creating blog:', error);
       },
     });
   }

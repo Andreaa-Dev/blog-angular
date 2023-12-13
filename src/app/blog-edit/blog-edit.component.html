@@ -1,1 +1,17 @@
-<p>blog-edit works!</p>
+<h1>Create new blog</h1>
+
+<form [formGroup]="editBlog" (ngSubmit)="handleBlogUpdated()">
+  <label for="title">Title:</label>
+  <input type="text" id="title" formControlName="title" />
+
+  <label for="author">Author:</label>
+  <input type="text" id="author" formControlName="author" />
+
+  <label for="content">Content:</label>
+  <input type="text" id="content" formControlName="content" />
+
+  <label for="date">Date:</label>
+  <input type="date" id="date" formControlName="date" />
+
+  <button type="submit" [disabled]="editBlog.invalid">Submit</button>
+</form>

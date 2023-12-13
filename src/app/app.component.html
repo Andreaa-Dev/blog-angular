@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Welcome to the Blog App</h1>
   <!-- pass blogs to blog-list -->
-  <app-blog-list [allBlogs]="blogs"></app-blog-list>
+  <!-- <app-blog-list [allBlogs]="blogs"></app-blog-list> -->
   <!-- Create New Blog Button -->
   <button (click)="showCreateForm()">Create New Blog</button>
 
@@ -17,19 +17,16 @@
       {{ blog.title }} - {{ blog.date | date }}
     </h3>
     <!-- Show/Hide Blog Detail -->
-    <!-- <div *ngIf="blog.showDetail"> -->
+    <div *ngIf="blog.showDetail">
+      <app-blog-detail [blog]="blog"></app-blog-detail>
+      <button (click)="showEditForm(blog)">Edit</button>
+      <button (click)="deleteBlog(blog.id)">Delete</button>
 
-    <app-blog-detail [blog]="blog"></app-blog-detail>
-    <!-- <button (click)="showEditForm(blog)">Edit</button> -->
-    <!-- <button (click)="deleteBlog(blog)">Delete</button> -->
-
-    <!-- Edit Blog Form -->
-    <!-- <app-blog-edit
-        *ngIf="blog.showEdit"
+      <!-- Edit Blog Form:  *ngIf="blog.showEdit" -->
+      <app-blog-edit
         [blog]="blog"
         (blogUpdated)="handleBlogUpdated($event)"
-      ></app-blog-edit> -->
-    <!-- </div>
-  </div> -->
+      ></app-blog-edit>
+    </div>
   </div>
 </div>
