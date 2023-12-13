@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { BlogRaw, Blog } from '../model/blog.model';
@@ -9,12 +9,14 @@ import { BlogService } from '../blog.service';
   templateUrl: './blog-edit.component.html',
   styleUrls: ['./blog-edit.component.css'],
 })
-export class BlogEditComponent {
+export class BlogEditComponent implements OnInit {
   @Output() blogEdited = new EventEmitter<BlogRaw>();
   @Input() blog!: Blog;
-  editBlog: FormGroup;
+  editBlog!: FormGroup;
 
-  constructor(private fb: FormBuilder, private blogService: BlogService) {
+  constructor(private fb: FormBuilder, private blogService: BlogService) {}
+
+  ngOnInit(): void {
     this.editBlog = this.fb.group({
       title: [this.blog.title, [Validators.required]],
       author: [this.blog.author, [Validators.required]],
@@ -27,6 +29,7 @@ export class BlogEditComponent {
       ],
     });
   }
+
   handleBlogUpdated() {
     const newBlog = { ...this.editBlog.value, id: this.blog.id };
     this.blogEdited.emit(newBlog);

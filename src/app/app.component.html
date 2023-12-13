@@ -11,23 +11,29 @@
     (blogCreated)="handleBlogCreated($event)"
   ></app-blog-create>
 
+  <!-- transformation  -->
+  <div *ngIf="!blogs || blogs.length === 0">
+    <p>Loading ...</p>
+  </div>
   <!-- Displaying a List of Blogs -->
-  <div *ngFor="let blog of blogs">
-    <h3 (click)="toggleBlogDetail(blog)">
-      {{ blog.title }} - {{ blog.date | date }}
-    </h3>
-    <!-- Show/Hide Blog Detail -->
-    <div *ngIf="blog.showDetail">
-      <app-blog-detail [blog]="blog"></app-blog-detail>
-      <button (click)="showEditForm(blog)">Edit</button>
-      <button (click)="deleteBlog(blog.id)">Delete</button>
+  <div *ngIf="blogs && blogs.length > 0">
+    <div *ngFor="let blog of blogs">
+      <h3 (click)="toggleBlogDetail(blog)">
+        {{ blog.title }} - {{ blog.date | date }}
+      </h3>
+      <!-- Show/Hide Blog Detail -->
+      <div *ngIf="blog.showDetail">
+        <app-blog-detail [blog]="blog"></app-blog-detail>
+        <button (click)="toggleBlogEdit(blog)">Edit</button>
+        <button (click)="deleteBlog(blog.id)">Delete</button>
 
-      <!-- Edit Blog Form -->
-      <app-blog-edit
-        *ngIf="showEdit"
-        [blog]="blog"
-        (blogEdited)="handleBlogUpdated($event)"
-      ></app-blog-edit>
+        <!-- Edit Blog Form -->
+        <app-blog-edit
+          *ngIf="blog.showEdit"
+          [blog]="blog"
+          (blogEdited)="handleBlogUpdated($event)"
+        ></app-blog-edit>
+      </div>
     </div>
   </div>
 </div>

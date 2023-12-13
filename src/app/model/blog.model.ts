@@ -8,4 +8,5 @@ export interface BlogRaw {
 
 export interface Blog extends BlogRaw {
   showDetail: boolean; // Added for toggle functionality
+  showEdit: boolean;
 }

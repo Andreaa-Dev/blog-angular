@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   blogs!: Blog[];
   blog!: BlogRaw;
   showCreate = false;
-  showEdit = false;
 
   constructor(private blogService: BlogService) {}
 
@@ -23,7 +22,11 @@ export class AppComponent implements OnInit {
   fetchBlogs() {
     this.blogService.getBlogs().subscribe({
       next: (v) => {
-        const result = v.map((item) => ({ ...item, showDetail: false }));
+        const result = v.map((item) => ({
+          ...item,
+          showDetail: false,
+          showEdit: false,
+        }));
         this.blogs = result;
       },
       error: (e) => {
@@ -50,16 +53,7 @@ export class AppComponent implements OnInit {
 
   // handleBlogCreated(event: any) {}
   handleBlogCreated(newBlogRaw: BlogRaw) {
-    const newBlog: Blog = {
-      showDetail: false,
-      id: newBlogRaw.id,
-      title: newBlogRaw.title,
-      author: newBlogRaw.author,
-      content: newBlogRaw.content,
-      date: newBlogRaw.date,
-    };
-
-    this.blogService.addBlog(newBlog).subscribe({
+    this.blogService.addBlog(newBlogRaw).subscribe({
       next: () => {
         this.showCreate = false;
         this.fetchBlogs();
@@ -79,9 +73,11 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // show edit form
-  showEditForm(blog: BlogRaw) {
-    this.showEdit = !this.showEdit;
+  toggleBlogEdit(blog: BlogRaw) {
+    const foundBlog = this.blogs.find((item) => item.id === blog.id);
+    if (foundBlog) {
+      foundBlog.showEdit = !foundBlog.showEdit;
+    }
   }
 
   // delete blog
@@ -101,15 +97,7 @@ export class AppComponent implements OnInit {
 
   // edit
   handleBlogUpdated(blog: BlogRaw) {
-    const newBlog: Blog = {
-      showDetail: false,
-      id: blog.id,
-      title: blog.title,
-      author: blog.author,
-      content: blog.content,
-      date: blog.date,
-    };
-    this.blogService.updateBlog(newBlog).subscribe({
+    this.blogService.updateBlog(blog).subscribe({
       next: (v) => {
         this.showCreate = false;
         this.blog = v;

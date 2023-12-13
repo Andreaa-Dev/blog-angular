@@ -21,11 +21,11 @@ export class BlogService {
     return this.http.get<BlogRaw>(`${this.apiUrl}/${id}`);
   }
 
-  addBlog(blog: Blog): Observable<BlogRaw> {
+  addBlog(blog: BlogRaw): Observable<BlogRaw> {
     return this.http.post<BlogRaw>(this.apiUrl, blog);
   }
 
-  updateBlog(blog: Blog): Observable<BlogRaw> {
+  updateBlog(blog: BlogRaw): Observable<BlogRaw> {
     return this.http.put<BlogRaw>(`${this.apiUrl}/${blog.id}`, blog);
   }
 
