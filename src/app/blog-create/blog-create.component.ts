@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { BlogRaw } from '../model/blog.model';
-import { Observable } from 'rxjs';
 import { BlogService } from '../blog.service';
 
 @Component({

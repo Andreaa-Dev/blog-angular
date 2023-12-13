@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BlogRaw } from '../model/blog.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { BlogRaw } from '../model/blog.model';
 import { BlogService } from '../blog.service';
 
 @Component({
@@ -9,7 +10,6 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./blog-edit.component.css'],
 })
 export class BlogEditComponent {
-  @Input() blog!: BlogRaw;
   @Output() blogEdited = new EventEmitter<BlogRaw>();
   editBlog: FormGroup;
 

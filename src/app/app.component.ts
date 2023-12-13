@@ -86,7 +86,16 @@ export class AppComponent implements OnInit {
 
   // delete blog
   deleteBlog(blogId: number) {
-    this.blogService.deleteBlog(blogId);
+    this.blogService.deleteBlog(blogId).subscribe({
+      next: () => {
+        this.showCreate = false;
+        this.fetchBlogs();
+      },
+      error: (error) => {
+        console.error('Error creating blog:', error);
+      },
+    });
+    this.fetchBlogs();
   }
 
   // edit
