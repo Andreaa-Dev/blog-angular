@@ -22,8 +22,10 @@
       <button (click)="showEditForm(blog)">Edit</button>
       <button (click)="deleteBlog(blog.id)">Delete</button>
 
-      <!-- Edit Blog Form:  *ngIf="blog.showEdit" -->
+      <!-- Edit Blog Form *ngIf="blog.showEdit"
+        (blogUpdated)="handleBlogUpdated($event)" -->
       <app-blog-edit
+        *ngIf="showEdit"
         [blog]="blog"
         (blogUpdated)="handleBlogUpdated($event)"
       ></app-blog-edit>

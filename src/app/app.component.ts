@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   blogs!: Blog[];
   blog!: BlogRaw;
   showCreate = false;
+  showEdit = false;
 
   constructor(private blogService: BlogService) {}
 
@@ -77,14 +78,17 @@ export class AppComponent implements OnInit {
       this.fetchBlog(foundBlog);
     }
   }
+
   // show edit form
   showEditForm(blog: BlogRaw) {
-    // this.blogService.updateBlog(blog)
+    this.showEdit = !this.showEdit;
   }
+
   // delete blog
   deleteBlog(blogId: number) {
     this.blogService.deleteBlog(blogId);
   }
+
   // edit
   handleBlogUpdated(blog: BlogRaw) {
     const newBlog: Blog = {
