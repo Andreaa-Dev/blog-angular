@@ -1,12 +1,12 @@
 {
   "blogs": [
     {
-      "showDetail": true,
-      "title": "sdv",
-      "author": "wef",
-      "content": "wsvdg",
-      "date": "2023-12-06",
-      "id": 6
+      "showDetail": false,
+      "id": 6,
+      "title": "fg",
+      "author": "df",
+      "content": "re",
+      "date": "2023-12-14"
     },
     {
       "showDetail": true,
@@ -15,6 +15,22 @@
       "content": "adasdad",
       "date": "2023-12-13",
       "id": 7
+    },
+    {
+      "showDetail": false,
+      "title": "CSS trick",
+      "author": "dsv",
+      "content": "vsdv",
+      "date": "2023-12-14",
+      "id": 8
+    },
+    {
+      "showDetail": false,
+      "title": "new",
+      "author": "new",
+      "content": "23",
+      "date": "2023-12-14",
+      "id": 9
     }
   ]
 }

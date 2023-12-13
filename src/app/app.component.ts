@@ -86,6 +86,7 @@ export class AppComponent implements OnInit {
 
   // delete blog
   deleteBlog(blogId: number) {
+    // subscribe - deal with response
     this.blogService.deleteBlog(blogId).subscribe({
       next: () => {
         this.showCreate = false;
@@ -108,10 +109,10 @@ export class AppComponent implements OnInit {
       content: blog.content,
       date: blog.date,
     };
-
     this.blogService.updateBlog(newBlog).subscribe({
-      next: () => {
+      next: (v) => {
         this.showCreate = false;
+        this.blog = v;
         this.fetchBlogs();
       },
       error: (error) => {
